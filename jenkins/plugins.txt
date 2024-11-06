@@ -16,6 +16,8 @@ mailer:latest
 matrix-auth:latest
 multibranch-scan-webhook-trigger:latest
 workflow-multibranch:latest
+workflow-cps:latest
+workflow-job:latest
 pam-auth:latest
 pollscm:latest
 pipeline-github-lib:latest
