@@ -52,6 +52,16 @@ pipeline {
         sh 'docker compose up -d --build'
       }
     }
+    stage('Test Application') {
+      steps {
+        script {
+          def response = sh(script: "curl -s -o /dev/null -w '%{http_code}' https://flask.dns.army/health", returnStdout: true).trim()
+          if (response != '200') {
+            error("Test failed. Expected HTTP 200, but got ${response}")
+          }
+        }
+      }
+    }
   }
 
   post {
