@@ -14,4 +14,4 @@ EXPOSE 8000
 
 USER django
 
-CMD ["sh", "-c", "./script.sh"]
+ENTRYPOINT ["/app/entrypoint.sh"]
