@@ -19,7 +19,7 @@ pipeline {
     stage("Build Docker Image") {
       steps {
         script {
-          def dockerImage = docker.build("${IMAGE_NAME}:${IMAGE_VERSION}")
+          dockerImage = docker.build("${IMAGE_NAME}:${IMAGE_VERSION}")
         }
       }
     }
