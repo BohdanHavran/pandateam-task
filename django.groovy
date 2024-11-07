@@ -1,5 +1,5 @@
 pipeline {
-  agent any
+  agent { label 'worker' }
 
   environment {
     IMAGE_NAME = "django-docker:1.1"
