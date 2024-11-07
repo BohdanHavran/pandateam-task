@@ -22,6 +22,15 @@ pipeline {
         }
       }
     }
+    stage("Scanning Docker Image") {
+      steps {
+        script {
+          sh ("""
+            CI=true dive ${IMAGE_NAME}:${IMAGE_VERSION}
+          """)
+        }
+      }
+    }
   }
 
   post {
