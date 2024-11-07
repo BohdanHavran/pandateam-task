@@ -1,4 +1,4 @@
-FROM python:3.10-alpine as builder
+FROM python:3.11-alpine as builder
 
 RUN apk add --update --virtual .build-deps \
     build-base \
@@ -9,13 +9,13 @@ RUN apk add --update --virtual .build-deps \
 COPY ./requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
-FROM python:3.10-alpine
+FROM python:3.11-alpine
 
 RUN apk add --no-cache libpq bash
 
 RUN adduser -D -u 1001 django
 
-COPY --from=builder /usr/local/lib/python3.8/site-packages/ /usr/local/lib/python3.8/site-packages/
+COPY --from=builder /usr/local/lib/python3.11/site-packages/ /usr/local/lib/python3.11/site-packages/
 COPY --from=builder /usr/local/bin/ /usr/local/bin/
 
 COPY ./ /app
@@ -28,7 +28,5 @@ WORKDIR /app
 EXPOSE 8000
 
 USER django
-
-ENV PYTHONUNBUFFERED 1
 
 ENTRYPOINT ["/app/entrypoint.sh"]
