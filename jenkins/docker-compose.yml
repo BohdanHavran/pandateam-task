@@ -3,6 +3,7 @@ services:
   jenkins:
     image: jenkins/jenkins:latest
     container_name: jenkins
+    user: root
     restart: always
     ports:
       - "8082:8080"
