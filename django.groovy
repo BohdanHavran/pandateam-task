@@ -5,7 +5,6 @@ pipeline {
     IMAGE_NAME = "bohdan004/django-docker"
     TOKEN = credentials("botSecret")
     CHAT_ID = credentials("chatId")
-    DOCKERHUB = credentials("DockerHub")
   }
 
   stages {
@@ -37,6 +36,20 @@ pipeline {
             dockerImage.push("${IMAGE_VERSION}")
           }
         }
+      }
+    }
+    stage('Update docker-compose.yml') {
+      steps {
+        script {
+          def composeFile = readFile 'docker-compose.yml'
+          composeFile = composeFile.replaceAll(/image: ${IMAGE_NAME}:\d+/, "image: ${IMAGE_NAME}:${IMAGE_VERSION}")
+          writeFile file: 'docker-compose.yml', text: composeFile
+        }
+      }
+    }
+    stage('Deploy with Docker Compose') {
+      steps {
+        sh 'docker-compose up -d --build'
       }
     }
   }
