@@ -2,7 +2,7 @@ pipeline {
   agent { label 'worker' }
 
   environment {
-    IMAGE_NAME = "bohdan004/django-docker"
+    IMAGE_NAME = "bohdan004/flask"
     TOKEN = credentials("botSecret")
     CHAT_ID = credentials("chatId")
   }

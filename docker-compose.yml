@@ -2,7 +2,8 @@ version: '3.9'
 
 services:
   django-app:
-    image: bohdan004/django-docker:1.0
+    image: bohdan004/flask:0.1
+    user: flask
     ports:
       - "8000:8000"
     restart: always

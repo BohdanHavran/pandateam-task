@@ -1,23 +1,16 @@
-FROM python:3.11-alpine
-
-RUN apk add --update --virtual .build-deps \
-    build-base \
-    postgresql-dev \
-    python3-dev \
-    libpq \
-    bash
+FROM python:3.9-slim
 
 COPY ./ /app
 
 RUN pip install --no-cache-dir -r /app/requirements.txt && \
-    adduser -D -u 1001 django && \
-    chown -R django:django /app && \
+    adduser -D -u 1001 flask && \
+    chown -R flask:flask /app && \
     chmod +x /app/entrypoint.sh
 
 WORKDIR /app
 
 EXPOSE 8000
 
-USER django
+USER flask
 
-ENTRYPOINT ["/app/entrypoint.sh"]
+CMD ["python", "app.py"]
