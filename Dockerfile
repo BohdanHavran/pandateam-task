@@ -8,7 +8,8 @@ COPY ./ /app
 
 RUN adduser -D -u 1001 django && \
     pip install --no-cache-dir -r requirements.txt && \
-    chown -R django:django /app
+    chown -R django:django /app && \
+    chmod +x /app/entrypoint.sh  # Add this line
 
 EXPOSE 8000
 
