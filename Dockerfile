@@ -1,30 +1,34 @@
-FROM python:3.11-alpine as builder
+FROM python:3.10-alpine as builder
 
-# Встановлюємо залежності для компіляції
-RUN apk add --no-cache gcc musl-dev libffi-dev python3-dev postgresql-dev zlib-dev
+RUN apk add --update --virtual .build-deps \
+    build-base \
+    postgresql-dev \
+    python3-dev \
+    libpq
 
-# Копіюємо requirements.txt
 COPY ./requirements.txt /app/requirements.txt
-
-# Встановлюємо залежності Python
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
-# Переходимо до іншого етапу
-FROM python:3.11-alpine
+FROM python:3.10-alpine
 
-# Встановлюємо необхідні бібліотеки
-RUN apk add --no-cache libpq
+RUN apk add --no-cache libpq bash
 
-# Копіюємо встановлені пакети з попереднього етапу
-COPY --from=builder /usr/local/lib/python3.11/site-packages/ /usr/local/lib/python3.11/site-packages/
+RUN adduser -D -u 1001 django
+
+COPY --from=builder /usr/local/lib/python3.8/site-packages/ /usr/local/lib/python3.8/site-packages/
 COPY --from=builder /usr/local/bin/ /usr/local/bin/
 
-# Копіюємо код
-COPY . /app
+COPY ./ /app
+
+RUN chown -R django:django /app && \
+    chmod +x /app/entrypoint.sh
 
 WORKDIR /app
 
-# Налаштовуємо змінні оточення
+EXPOSE 8000
+
+USER django
+
 ENV PYTHONUNBUFFERED 1
 
 ENTRYPOINT ["/app/entrypoint.sh"]
