@@ -22,7 +22,7 @@ pipeline {
         }
         stage("Test Docker Image") {
             steps {
-                whoami
+                sh "whoami"
             }
         }
     }
