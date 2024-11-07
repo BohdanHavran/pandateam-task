@@ -1,4 +1,4 @@
-FROM python:3.11-alpine as builder
+FROM python:3.11-alpine
 
 RUN apk add --update --virtual .build-deps \
     build-base \
