@@ -2,7 +2,7 @@ pipeline {
   agent { label 'worker' }
 
   environment {
-    IMAGE_NAME = "django-docker"
+    IMAGE_NAME = "bohdan004/django-docker"
     TOKEN = credentials("botSecret")
     CHAT_ID = credentials("chatId")
   }
@@ -22,12 +22,17 @@ pipeline {
         }
       }
     }
-    stage("Scanning Docker Image") {
+    stage("Analyze Docker Image") {
       steps {
         script {
-          sh ("""
-            CI=true dive ${IMAGE_NAME}:${IMAGE_VERSION}
-          """)
+          sh "CI=true dive ${IMAGE_NAME}:${IMAGE_VERSION}"
+        }
+      }
+    }
+    stage("Push Docker Image") {
+      steps {
+        withDockerRegistry(credentialsId: 'DockerHub', url: 'https://index.docker.io/v1/') {
+          dockerImage.push()
         }
       }
     }
