@@ -42,7 +42,7 @@ pipeline {
       steps {
         script {
           def composeFile = readFile 'docker-compose.yml'
-          composeFile = composeFile.replaceAll(/image: ${IMAGE_NAME}:\d+?/, "image: ${IMAGE_NAME}:${IMAGE_VERSION}")
+          def composeFile = composeFile.replaceAll(/image: ${IMAGE_NAME}:.*/, "image: ${IMAGE_NAME}:${IMAGE_VERSION}")
           writeFile file: 'docker-compose.yml', text: composeFile
         }
       }
