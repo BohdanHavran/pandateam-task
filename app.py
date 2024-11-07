@@ -2,9 +2,9 @@ from flask import Flask, jsonify
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET'])
-def hello():
-    return jsonify(message="Hello, Panda Team!")
+@app.route('/')
+def home():
+    return render_template('index.html')
 
 @app.route('/health', methods=['GET'])
 def health():
