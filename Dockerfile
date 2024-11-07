@@ -1,11 +1,10 @@
-FROM python:3.11-alpine
+FROM python:3.9-slim
 
 COPY ./ /app
 
 RUN pip install --no-cache-dir -r /app/requirements.txt && \
     adduser -D -u 1001 flask && \
-    chown -R flask:flask /app && \
-    chmod +x /app/entrypoint.sh
+    chown -R flask:flask /app
 
 WORKDIR /app
 
