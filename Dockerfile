@@ -4,7 +4,7 @@ WORKDIR /app
 
 RUN apk add --no-cache bash
 
-COPY ./ ./
+COPY ./ /app
 
 RUN adduser -D -u 1001 django && \
     pip install --no-cache-dir -r requirements.txt && \
@@ -14,4 +14,4 @@ EXPOSE 8000
 
 USER django
 
-CMD ["sh", "-c", ".script.sh"]
+CMD ["sh", "-c", "./script.sh"]
