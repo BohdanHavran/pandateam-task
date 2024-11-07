@@ -18,7 +18,7 @@ pipeline {
     stage("Build Docker Image") {
       steps {
         script {
-          dockerImage = docker.build("${IMAGE_NAME}:${IMAGE_VERSION}")
+          def dockerImage = docker.build("${IMAGE_NAME}:${IMAGE_VERSION}")
         }
       }
     }
@@ -31,8 +31,8 @@ pipeline {
     }
     stage("Push Docker Image") {
       steps {
-        withDockerRegistry(credentialsId: 'DockerHub', url: 'https://index.docker.io/v1/') {
-          script {
+        script {
+          docker.withRegistry('https://index.docker.io/v1/', 'DockerHub') {
             dockerImage.push()
           }
         }
