@@ -33,7 +33,7 @@ pipeline {
     stage("Push Docker Image") {
       steps {
         script {
-          withDockerRegistry(credentialsId: 'DockerHub', url: 'https://index.docker.io/v1/') {
+          withDockerRegistry(credentials("DockerHub"), url: 'https://index.docker.io/v1/') {
             dockerImage.push("${IMAGE_VERSION}")
           }
         }
