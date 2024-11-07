@@ -3,7 +3,6 @@ version: '3.9'
 services:
   django-app:
     image: bohdan004/django-docker:1.0
-    user: django
     ports:
       - "8000:8000"
     restart: always
