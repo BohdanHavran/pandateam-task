@@ -42,7 +42,7 @@ pipeline {
       steps {
         script {
           def composeFile = readFile 'docker-compose.yml'
-          composeFile = composeFile.replaceAll(/image: ${IMAGE_NAME}:\d+(\.\d+)?/, "image: ${IMAGE_NAME}:${IMAGE_VERSION}")
+          composeFile = composeFile.replaceAll(/image: ${IMAGE_NAME}:\d+?/, "image: ${IMAGE_NAME}:${IMAGE_VERSION}")
           writeFile file: 'docker-compose.yml', text: composeFile
         }
       }
@@ -50,15 +50,6 @@ pipeline {
     stage('Deploy with Docker Compose') {
       steps {
         sh 'docker compose up -d --build'
-      }
-    }
-    stage('Commit Changes') {
-      steps {
-        sh 'git config user.name "jenkins"'
-        sh 'git config user.email "jenkins@panda.com"'
-        sh 'git add docker-compose.yml'
-        sh 'git commit -m "Update image version to ${IMAGE_VERSION}"'
-        sh 'git push origin master'
       }
     }
   }
