@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor
+    container_name: cadvisor
+    restart: always
+    devices:
+      - "/dev/kmsg:/dev/kmsg"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro 
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro 
+    networks:
+      - monitoring_agent
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+  
+  node-exporter:
+    image: quay.io/prometheus/node-exporter:latest
+    container_name: node_exporter
+    restart: always
+    expose:
+      - 9100
+    ports:
+      - 9100:9100
+    volumes:
+      - '/:/host:ro,rslave'
+    networks:
+      - monitoring_agent
+        
+networks:
+  monitoring_agent:
+    driver: bridge
