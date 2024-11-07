@@ -1,0 +1,65 @@
+version: '3.9'
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    expose:
+      - 9090
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus/config:/etc/prometheus/
+      - ./prometheus/data:/prometheus
+    networks:
+      - grafana
+    restart: always
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - 3000:3000
+    environment:
+      - GF_SERVER_ROOT_URL=https://grafana.gremsys.com/
+    volumes:
+      - ./grafana_data:/var/lib/grafana
+    networks:
+      - grafana
+    restart: always
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor
+    container_name: cadvisor
+    restart: always
+    devices:
+      - "/dev/kmsg:/dev/kmsg"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro 
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro 
+    networks:
+      - grafana
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+  
+  node-exporter:
+    image: quay.io/prometheus/node-exporter:latest
+    container_name: node_exporter
+    restart: always
+    expose:
+      - 9100
+    ports:
+      - 9100:9100
+    volumes:
+      - '/:/host:ro,rslave'
+    networks:
+      - grafana
+        
+networks:
+  grafana:
+    driver: bridge
