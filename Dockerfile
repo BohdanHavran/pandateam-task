@@ -1,4 +1,5 @@
-FROM python:3.8.18-alpine as Zhytomyr
+FROM python:3.11-alpine as builder
+
 RUN apk add --update --virtual .build-deps \
     build-base \
     postgresql-dev \
@@ -6,18 +7,27 @@ RUN apk add --update --virtual .build-deps \
     libpq
 
 COPY ./requirements.txt /app/requirements.txt
-RUN pip install -r /app/requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
 
-FROM python:3.8.18-alpine
+FROM python:3.11-alpine
 
-RUN apk add libpq
+RUN apk add --no-cache libpq bash
 
-COPY --from=Zhytomyr /usr/local/lib/python3.8/site-packages/ /usr/local/lib/python3.8/site-packages/
-COPY --from=Zhytomyr /usr/local/bin/ /usr/local/bin/
+RUN adduser -D -u 1001 django
 
-COPY . /app
+COPY --from=builder /usr/local/lib/python3.8/site-packages/ /usr/local/lib/python3.8/site-packages/
+COPY --from=builder /usr/local/bin/ /usr/local/bin/
+
+COPY ./ /app
+
+RUN chown -R django:django /app && \
+    chmod +x /app/entrypoint.sh
 
 WORKDIR /app
+
+EXPOSE 8000
+
+USER django
 
 ENV PYTHONUNBUFFERED 1
 
