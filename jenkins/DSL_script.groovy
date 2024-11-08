@@ -16,3 +16,9 @@ pipelineJob('flask') {
     githubPush()
   }
 }
+
+job('restart container flask-app') {
+  steps {
+    shell('docker restart flask-app')
+  }
+}
