@@ -66,22 +66,28 @@ pipeline {
 
   post {
     success { 
-      def duration = currentBuild.durationString ?: "Duration not available"
-      sh ("""
-        curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='✅ *Project*: ${env.JOB_NAME} \n🌿 *Branch*: [$GIT_BRANCH]($GIT_URL) \n🚀 *Status*: [Success](${BUILD_URL}consoleFull) \n⏰ *Duration*: ${duration} \n👤 *Triggered by*: ${env.BUILD_USER}'
-      """)
+      script {
+        def duration = currentBuild.durationString ?: "Duration not available"
+        sh ("""
+          curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='✅ *Project*: ${env.JOB_NAME} \n🌿 *Branch*: [$GIT_BRANCH]($GIT_URL) \n🚀 *Status*: [Success](${BUILD_URL}consoleFull) \n⏰ *Duration*: ${duration} \n👤 *Triggered by*: ${env.BUILD_USER}'
+        """)
+      }
     }
     aborted {
-      def duration = currentBuild.durationString ?: "Duration not available"
-      sh ("""
-        curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='⚠️ *Project*: ${env.JOB_NAME} \n🌿 *Branch*: [$GIT_BRANCH]($GIT_URL) \n🚧 *Status*: [Aborted](${BUILD_URL}consoleFull) \n⏰ *Duration*: ${duration} \n👤 *Triggered by*: ${env.BUILD_USER}'
-      """)
+      script {
+        def duration = currentBuild.durationString ?: "Duration not available"
+        sh ("""
+          curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='⚠️ *Project*: ${env.JOB_NAME} \n🌿 *Branch*: [$GIT_BRANCH]($GIT_URL) \n🚧 *Status*: [Aborted](${BUILD_URL}consoleFull) \n⏰ *Duration*: ${duration} \n👤 *Triggered by*: ${env.BUILD_USER}'
+        """)
+      }
     }
     failure {
-      def duration = currentBuild.durationString ?: "Duration not available"
-      sh ("""
-        curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='❌ *Project*: ${env.JOB_NAME} \n🌿 *Branch*: [$GIT_BRANCH]($GIT_URL) \n💥 *Status*: [Failed](${BUILD_URL}consoleFull) \n⏰ *Duration*: ${duration} \n👤 *Triggered by*: ${env.BUILD_USER}'
-      """)
+      script {
+        def duration = currentBuild.durationString ?: "Duration not available"
+        sh ("""
+          curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='❌ *Project*: ${env.JOB_NAME} \n🌿 *Branch*: [$GIT_BRANCH]($GIT_URL) \n💥 *Status*: [Failed](${BUILD_URL}consoleFull) \n⏰ *Duration*: ${duration} \n👤 *Triggered by*: ${env.BUILD_USER}'
+        """)
+      }
     }
   }
 }
