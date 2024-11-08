@@ -8,6 +8,8 @@ Url: https://jenkins.dns.army/
 
 ![image](https://github.com/user-attachments/assets/e939a4b1-aed6-469b-885c-3e49eeb26071)
 
+Before starting Jenkins, you can use the [docker compose file](https://github.com/BohdanHavran/pandateam-task/blob/infrastructure/jenkins/docker-compose.yml)
+
 # <a name="Grafana+Prometheus">Grafana + Prometheus</a>
 
 # <a name="Terraform">Terraform</a>
