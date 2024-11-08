@@ -4,7 +4,7 @@ In this task, I automatically install Jenkins using Docker compose. In this task
 [Jenkins](#Jenkins) | [Grafana + Prometheus](#Grafana+Prometheus) | [Terraform](#Terraform)
 
 # <a name="Jenkins">Jenkins</a>
-Url: https://jenkins.dns.army/
+URL: https://jenkins.dns.army/
 
 ![image](https://github.com/user-attachments/assets/e939a4b1-aed6-469b-885c-3e49eeb26071)
 
@@ -20,10 +20,10 @@ To start Jenkins, just use the command:
 ```
 docker compose up -d
 ```
-And as a result we will get
+And as a result we will get:
 ![image](https://github.com/user-attachments/assets/4427295d-cadd-486c-8a38-5ed996a1c031)
 
-Note: If your Jenkins is public, I recommend configuring Webhooks
+You can also configure webhooks to automatically run jobs if there are changes in the repository:
 ![image](https://github.com/user-attachments/assets/6e5dd676-580b-4c7a-8ed2-d5fc41958130)
 
 ### DSL
@@ -35,6 +35,15 @@ Now you need to configure the job that will run the [dsl-script](https://github.
 
 As a result of the execution of this job, the jobs described in [dsl-script](https://github.com/BohdanHavran/pandateam-task/blob/infrastructure/jenkins/DSL_script.groovy) will appear
 ![image](https://github.com/user-attachments/assets/2ff9d8b7-b119-4c7c-9dff-dea7f413c42a)
+
+### Pipeline for a Python application
+URL: https://flask.dns.army/
+
+A [pipeline](https://github.com/BohdanHavran/pandateam-task/blob/master/flask.groovy) for a containerized Python application has been configured
+
+Here is the output of the pipeline:
+![image](https://github.com/user-attachments/assets/01dbe81c-7713-41cb-b64d-c961c05dcc57)
+![image](https://github.com/user-attachments/assets/b366c475-9207-4922-b2b9-96ecf908339f)
 
 # <a name="Grafana+Prometheus">Grafana + Prometheus</a>
 
