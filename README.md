@@ -45,6 +45,13 @@ Here is the output of the pipeline:
 ![image](https://github.com/user-attachments/assets/01dbe81c-7713-41cb-b64d-c961c05dcc57)
 ![image](https://github.com/user-attachments/assets/b366c475-9207-4922-b2b9-96ecf908339f)
 
+There is also a notification of the status of the pipeline in [Telegram](https://t.me/panda_alert)
+![image](https://github.com/user-attachments/assets/16051411-abd8-412a-9c79-b3fe36a21e89)
+
+### Restart the container by command
+![image](https://github.com/user-attachments/assets/d69d678c-c5c1-49aa-ba22-d2215d6bb25f)
+![image](https://github.com/user-attachments/assets/615cd72f-d646-4cac-9a99-8765047a1e7c)
+
 # <a name="Grafana+Prometheus">Grafana + Prometheus</a>
 
 # <a name="Terraform">Terraform</a>
