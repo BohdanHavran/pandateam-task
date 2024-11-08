@@ -4,6 +4,9 @@ In this task, I automatically install Jenkins using Docker compose. In this task
 [Jenkins](#Jenkins) | [Grafana + Prometheus](#Grafana+Prometheus) | [Terraform](#Terraform)
 
 # <a name="Jenkins">Jenkins</a>
+Url: https://jenkins.dns.army/
+
+![image](https://github.com/user-attachments/assets/e939a4b1-aed6-469b-885c-3e49eeb26071)
 
 # <a name="Grafana+Prometheus">Grafana + Prometheus</a>
 
