@@ -53,5 +53,45 @@ There is also a notification of the status of the pipeline in [Telegram](https:/
 ![image](https://github.com/user-attachments/assets/615cd72f-d646-4cac-9a99-8765047a1e7c)
 
 # <a name="Grafana+Prometheus">Grafana + Prometheus</a>
+URL: https://grafana.dns.navy/
+![image](https://github.com/user-attachments/assets/7ce7cd0c-cd3b-4bb7-b169-7953a4e2223b)
+
+### Settings
+Before starting Grafana + Prometheus, you can use the [docker compose file](https://github.com/BohdanHavran/pandateam-task/blob/infrastructure/grafana/docker-compose.yml)
+
+Note: It is advisable to review the [Prometheus configuration](https://github.com/BohdanHavran/pandateam-task/blob/infrastructure/grafana/prometheus/config/prometheus.yml) and adjust it for yourself
+
+To start Grafana + Prometheus, just use the command:
+```
+docker compose up -d
+```
+![image](https://github.com/user-attachments/assets/f10b4682-9c27-4b5f-81cc-5d8d745e2748)
+
+Examples of monitoring visualization:
+![image](https://github.com/user-attachments/assets/aafe4464-7303-4d4d-9e57-aad0b91ce8c5)
+
+There are also configured alerts that are notified [Telegram](https://t.me/panda_alert)
+![image](https://github.com/user-attachments/assets/8cf3102d-bbe5-41c6-adbc-e92f28af6de3)
+![image](https://github.com/user-attachments/assets/143b2379-6c41-42d9-a4a1-6c83f40ad409)
+
+For jenkins slave, you need to configure agents for monitoring, you can use the [docker compose file](https://github.com/BohdanHavran/pandateam-task/blob/infrastructure/monitoring_agent/docker-compose.yml)
 
 # <a name="Terraform">Terraform</a>
+If you don't have infrastructure yet, you can use my [terraform](https://github.com/BohdanHavran/pandateam-task/tree/infrastructure/terraform) to raise it in digitalocean
+
+Note: Don't forget to create your token
+
+In order to start working with the project, you need:
+```
+git clone --branch infrastructure https://github.com/BohdanHavran/pandateam-task.git
+```
+```
+cd terraform
+```
+In order to run this project, you need to enter the following commands:
+```
+terraform init
+```
+```
+terraform apply
+```
