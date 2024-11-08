@@ -1,0 +1,11 @@
+global:
+  scrape_interval: 5s
+  external_labels:
+    monitor: 'node'
+scrape_configs:
+  - job_name: 'host'
+    static_configs:
+      - targets: []
+  - job_name: 'worker'
+    static_configs:
+      - targets: []
