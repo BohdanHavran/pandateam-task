@@ -11,7 +11,10 @@ Url: https://jenkins.dns.army/
 ### Settings
 Before starting Jenkins, you can use the [docker compose file](https://github.com/BohdanHavran/pandateam-task/blob/infrastructure/jenkins/docker-compose.yml), where you can write the [configuration of Jenkins](https://github.com/BohdanHavran/pandateam-task/blob/infrastructure/jenkins/casc.yaml) and [Jenkins plugins](https://github.com/BohdanHavran/pandateam-task/blob/infrastructure/jenkins/plugins.txt)
 
-Note: It is advisable to change the admin password in the [Jenkins configuration](https://github.com/BohdanHavran/pandateam-task/blob/infrastructure/jenkins/casc.yaml)
+Note: 
+
+- It is advisable to change the admin password in the [Jenkins configuration](https://github.com/BohdanHavran/pandateam-task/blob/infrastructure/jenkins/casc.yaml)
+- All jobs were executed on Jenkins slave, how to configure it can be seen [here](https://codemyworld.hashnode.dev/setting-up-jenkins-agent-using-ssh)
 
 To start Jenkins, just use the command:
 ```
@@ -19,6 +22,19 @@ docker compose up -d
 ```
 And as a result we will get
 ![image](https://github.com/user-attachments/assets/4427295d-cadd-486c-8a38-5ed996a1c031)
+
+Note: If your Jenkins is public, I recommend configuring Webhooks
+![image](https://github.com/user-attachments/assets/6e5dd676-580b-4c7a-8ed2-d5fc41958130)
+
+### DSL
+
+Now you need to configure the job that will run the [dsl-script](https://github.com/BohdanHavran/pandateam-task/blob/infrastructure/jenkins/DSL_script.groovy)
+![image](https://github.com/user-attachments/assets/168bafa0-8c08-4168-a9ae-6cf7c1ba1923)
+![image](https://github.com/user-attachments/assets/07bada12-5f79-41c4-a5f5-d65187a5b711)
+![image](https://github.com/user-attachments/assets/5df2af93-a139-4879-afb2-17cd992a9c20)
+
+As a result of the execution of this job, the jobs described in [dsl-script](https://github.com/BohdanHavran/pandateam-task/blob/infrastructure/jenkins/DSL_script.groovy) will appear
+![image](https://github.com/user-attachments/assets/2ff9d8b7-b119-4c7c-9dff-dea7f413c42a)
 
 # <a name="Grafana+Prometheus">Grafana + Prometheus</a>
 
