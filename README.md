@@ -18,7 +18,7 @@ To start Jenkins, just use the command:
 docker compose up -d
 ```
 And as a result we will get
-![image](https://github.com/user-attachments/assets/78ff717f-49d8-4963-8b84-09104264dbe5)
+![image](https://github.com/user-attachments/assets/4427295d-cadd-486c-8a38-5ed996a1c031)
 
 # <a name="Grafana+Prometheus">Grafana + Prometheus</a>
 
