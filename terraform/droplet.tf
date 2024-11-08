@@ -78,6 +78,16 @@ module "droplet_worker" {
       protocol         = "tcp"
       port_range       = "443"
       source_addresses = ["0.0.0.0/0", "::/0"]
+    },
+    {
+      protocol         = "tcp"
+      port_range       = "8080"
+      source_addresses = [module.droplet_master.public_ip]
+    },
+    {
+      protocol         = "tcp"
+      port_range       = "9100"
+      source_addresses = [module.droplet_master.public_ip]
     }
   ]
 
