@@ -67,17 +67,17 @@ pipeline {
   post {
     success { 
       sh ("""
-        curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*Full project name*: ${env.JOB_NAME} \n*Branch*: [$GIT_BRANCH]($GIT_URL) \n*Build* : [OK](${BUILD_URL}consoleFull)'
+        curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='✅ *Project*: ${env.JOB_NAME} \n🌿 *Branch*: [$GIT_BRANCH]($GIT_URL) \n🚀 *Status*: [Success](${BUILD_URL}consoleFull) \n⏰ *Duration*: ${BUILD_DURATION} \n👤 *Triggered by*: ${env.BUILD_USER}'
       """)
     }
     aborted {
       sh ("""
-        curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*Full project name*: ${env.JOB_NAME} \n*Branch*: [$GIT_BRANCH]($GIT_URL) \n*Build* : [Aborted](${BUILD_URL}consoleFull)'
+        curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='⚠️ *Project*: ${env.JOB_NAME} \n🌿 *Branch*: [$GIT_BRANCH]($GIT_URL) \n🚧 *Status*: [Aborted](${BUILD_URL}consoleFull) \n⏰ *Duration*: ${BUILD_DURATION} \n👤 *Triggered by*: ${env.BUILD_USER}'
       """)
     }
     failure {
       sh ("""
-        curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='*Full project name*: ${env.JOB_NAME} \n*Branch*: [$GIT_BRANCH]($GIT_URL) \n*Build* : [Not OK](${BUILD_URL}consoleFull)'
+        curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d parse_mode=markdown -d text='❌ *Project*: ${env.JOB_NAME} \n🌿 *Branch*: [$GIT_BRANCH]($GIT_URL) \n💥 *Status*: [Failed](${BUILD_URL}consoleFull) \n⏰ *Duration*: ${BUILD_DURATION} \n👤 *Triggered by*: ${env.BUILD_USER}'
       """)
     }
   }
